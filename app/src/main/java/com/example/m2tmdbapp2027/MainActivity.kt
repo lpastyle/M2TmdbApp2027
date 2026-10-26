@@ -9,6 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.example.m2tmdbapp2027.data.remote.ITmdbApi
+import com.example.m2tmdbapp2027.data.remote.Person
 import com.example.m2tmdbapp2027.data.remote.RetrofitClient
 import com.example.m2tmdbapp2027.databinding.ActivityMainBinding
 import kotlinx.coroutines.launch
@@ -17,6 +18,9 @@ class MainActivity : AppCompatActivity() {
     private val LOGTAG= MainActivity::class.simpleName
 
     private lateinit var binding: ActivityMainBinding
+    private var persons = arrayListOf<Person>()
+
+    private var totalPage = Int.MAX_VALUE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +39,9 @@ class MainActivity : AppCompatActivity() {
         val api = RetrofitClient.create(ITmdbApi::class.java)
         lifecycleScope.launch {
             val response = api.getPopularPersons()
+            totalPage = response.totalPages
+            persons.addAll(response.results)
+            binding.totalResultsText = getString(R.string.total_results_text,persons.size, response.totalResults)
             Log.d(LOGTAG, "Popular persons: ${response.results.size}")
         }
     }
