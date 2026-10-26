@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         // Init recycler view
         binding.popularPersonRv.setHasFixedSize(true)
         binding.popularPersonRv.layoutManager = LinearLayoutManager(this)
-        personAdapter = PersonAdapter()
+        personAdapter = PersonAdapter(persons)
         binding.popularPersonRv.adapter = personAdapter
 
         val api = RetrofitClient.create(ITmdbApi::class.java)
