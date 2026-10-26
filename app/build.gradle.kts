@@ -3,6 +3,7 @@ import kotlin.apply
 
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.android.legacy.kapt)
 }
 
 val secrets = Properties().apply {
@@ -39,8 +40,11 @@ android {
             }
         }
     }
+
     buildFeatures {
         buildConfig = true
+        viewBinding = true
+        dataBinding = true
     }
 
     compileOptions {
