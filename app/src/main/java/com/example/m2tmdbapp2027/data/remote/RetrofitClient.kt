@@ -1,5 +1,12 @@
 package com.example.m2tmdbapp2027.data.remote
 
+import com.example.m2tmdbapp2027.BuildConfig
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+
 object RetrofitClient {
     private const val BASE_URL = "https://api.themoviedb.org/3/"
 
@@ -14,5 +21,33 @@ object RetrofitClient {
         "\"${secrets.getProperty("TMDB_API_KEY", "")}\""
     )
     */
+
+    private val okHttpClient: OkHttpClient by lazy {
+        val logging = HttpLoggingInterceptor().apply {
+            level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
+            else HttpLoggingInterceptor.Level.NONE
+        }
+        OkHttpClient.Builder()
+            .addInterceptor { chain ->
+                val url = chain.request().url.newBuilder()
+                    .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY)
+                    .build()
+                chain.proceed(chain.request().newBuilder().url(url).build())
+            }
+            .addInterceptor(logging)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .build()
+    }
+
+    val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(com.example.m2tmdbapp2027.data.remote.RetrofitClient.BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    fun <T> create(service: Class<T>): T = retrofit.create(service)
 
 }
