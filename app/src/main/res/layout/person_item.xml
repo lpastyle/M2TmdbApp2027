@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -45,7 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="parent"
-            android:text=""
+            android:text="@{person.name}"
             tools:text="Person name" />
 
         <TextView
@@ -60,7 +59,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/name_tv"
-            android:text=""
+            android:text="@{person.knownForDepartment}"
             tools:text="Known for departement" />
 
         <TextView
@@ -74,7 +73,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/known_for_tv"
-            android:text=""
+            android:text="@{String.format(`%.1f`,person.popularity)}"
             tools:text="Popularity" />
 
         <FrameLayout
