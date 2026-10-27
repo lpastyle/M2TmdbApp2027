@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         // Infinite scrolling
         binding.popularPersonRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy <= 0 || curPage > totalPage) return
+                if (dy <= 0 || binding.loading || curPage > totalPage) return
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                 val lastVisible = layoutManager.findLastVisibleItemPosition()
                 if (lastVisible >= layoutManager.itemCount - 1) {
@@ -65,17 +65,22 @@ class MainActivity : AppCompatActivity() {
     private fun loadCurrentPage() {
         val api = RetrofitClient.create(ITmdbApi::class.java)
         lifecycleScope.launch {
+            binding.loading = true
             try {
-                val response = api.getPopularPersons()
+                val response = api.getPopularPersons(curPage)
                 totalPage = response.totalPages
                 persons.addAll(response.results)
+                persons.sortByDescending { it.popularity }
                 personAdapter.notifyDataSetChanged()
+                curPage++
                 binding.totalResultsText =
                     getString(R.string.total_results_text, persons.size, response.totalResults)
                 Log.d(LOGTAG, "Popular persons: ${response.results.size}")
             } catch (e: Exception) {
                 if (e is CancellationException) throw e
                 Log.e(LOGTAG, "Unable to load popular persons", e)
+            } finally {
+                binding.loading = false
             }
         }
     }

@@ -5,6 +5,7 @@
 
     <data>
         <variable name="totalResultsText" type="String" />
+        <variable name="loading" type="boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
