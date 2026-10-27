@@ -39,6 +39,7 @@ class PersonAdapter(private val persons: ArrayList<Person>) : RecyclerView.Adapt
         fun bind(person: Person) {
             binding.person = person
             binding.scoreMax = maxPopularity
+            binding.executePendingBindings()
         }
     }
 }
