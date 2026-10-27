@@ -24,6 +24,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:imageUrl="@{person.profilePath}"
             app:srcCompat="@mipmap/ic_launcher_round" />
 
         <androidx.constraintlayout.widget.Guideline
