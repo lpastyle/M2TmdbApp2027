@@ -24,5 +24,9 @@ class PersonAdapter(private val persons: ArrayList<Person>) : RecyclerView.Adapt
 
     override fun getItemCount(): Int = persons.size
 
-    class  PersonViewHolder(private val binding : PersonItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class  PersonViewHolder(private val binding : PersonItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(person: Person) {
+            binding.person = person
+        }
+    }
 }
