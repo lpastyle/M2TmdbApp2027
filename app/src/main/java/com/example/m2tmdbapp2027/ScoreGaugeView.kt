@@ -21,13 +21,17 @@ class ScoreGaugeView@JvmOverloads constructor (
 
     var scoreMax : Float = DEFAULT_SCORE_MAX
     var scoreValue : Float = DEFAULT_SCORE_VALUE
-    var scoreLabel : String =DEFAULT_SCORE_LABEL
+    var scoreLabel : String = DEFAULT_SCORE_LABEL
     var scoreColor : Int = DEFAULT_SCORE_COLOR
 
     init {
-       // context.withStyledAttributes(
+        context.withStyledAttributes(attrs, R.styleable.ScoreGaugeView) {
+            scoreMax = getFloat(R.styleable.ScoreGaugeView_scoreMax, DEFAULT_SCORE_MAX)
+            scoreValue = getFloat(R.styleable.ScoreGaugeView_scoreValue, DEFAULT_SCORE_VALUE)
+            scoreColor = getColor(R.styleable.ScoreGaugeView_scoreColor, DEFAULT_SCORE_COLOR)
+            scoreLabel = getString(R.styleable.ScoreGaugeView_scoreLabel) ?: DEFAULT_SCORE_LABEL
 
-//        )
+        }
     }
 
 
