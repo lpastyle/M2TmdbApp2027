@@ -5,6 +5,7 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 // https://api.themoviedb.org/3/person/popular?api_key=<TMDB_API_KEY>&page=1
+// https://api.themoviedb.org/3/configuration?api_key=<TMDB_API_KEY>
 
 interface ITmdbApi {
     @GET("person/popular")

@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
             val response = api.getPopularPersons()
             totalPage = response.totalPages
             persons.addAll(response.results)
+            personAdapter.notifyDataSetChanged()
             binding.totalResultsText = getString(R.string.total_results_text,persons.size, response.totalResults)
             Log.d(LOGTAG, "Popular persons: ${response.results.size}")
         }
