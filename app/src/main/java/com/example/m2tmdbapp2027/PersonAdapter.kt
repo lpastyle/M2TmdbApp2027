@@ -7,6 +7,17 @@ import com.example.m2tmdbapp2027.data.remote.Person
 import com.example.m2tmdbapp2027.databinding.PersonItemBinding
 
 class PersonAdapter(private val persons: ArrayList<Person>) : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>()  {
+
+    var maxPopularity = 0f
+
+    init {
+        registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onChanged() {
+                maxPopularity = persons.maxOfOrNull { it.popularity } ?: 0f
+            }
+        })
+
+    }
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -24,9 +35,10 @@ class PersonAdapter(private val persons: ArrayList<Person>) : RecyclerView.Adapt
 
     override fun getItemCount(): Int = persons.size
 
-    class  PersonViewHolder(private val binding : PersonItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class  PersonViewHolder(private val binding : PersonItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(person: Person) {
             binding.person = person
+            binding.scoreMax = maxPopularity
         }
     }
 }
