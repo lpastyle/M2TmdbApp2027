@@ -1,9 +1,20 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.M2TmdbApp2027" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.M2TmdbApp2027" parent="Theme.Material3.DayNight">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="actionBarStyle">@style/Widget.M2TmdbApp2027.ActionBar</item>
+    </style>
+
+    <style name="Widget.M2TmdbApp2027.ActionBar" parent="Widget.Material3.ActionBar.Solid">
+        <item name="background">@color/action_bar_background</item>
+        <item name="titleTextStyle">@style/TextAppearance.M2TmdbApp2027.ActionBar.Title</item>
+    </style>
+
+    <style name="TextAppearance.M2TmdbApp2027.ActionBar.Title" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="Theme.M2TmdbApp2027" parent="Base.Theme.M2TmdbApp2027" />
+
 </resources>

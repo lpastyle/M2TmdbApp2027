@@ -1,7 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.M2TmdbApp2027" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.M2TmdbApp2027" parent="Theme.Material3.Dark">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="actionBarStyle">@style/Widget.M2TmdbApp2027.ActionBar</item>
     </style>
+
+    <style name="Widget.LpaTmdbAppNg.ActionBar" parent="Widget.Material3.ActionBar.Solid">
+        <item name="background">@color/action_bar_background_night</item>
+        <item name="titleTextStyle">@style/TextAppearance.M2TmdbApp2027.ActionBar.Title</item>
+    </style>
+
 </resources>
