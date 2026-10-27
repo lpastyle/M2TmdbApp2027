@@ -6,13 +6,12 @@
     <com.example.m2tmdbapp2027.ScoreGaugeView
         style="@style/Widget.Theme.M2TmdbApp2027.ScoreGaugeView"
         android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:paddingLeft="10dp"
-        android:paddingBottom="10dp"
-        app:scoreColor="@android:color/holo_green_light"
-        app:scoreLabel="HELLO"
+        android:layout_height="wrap_content"
+        android:padding="40dp"
+        app:scoreColor="@android:color/holo_green_dark"
+        app:scoreLabel="TEST"
         app:scoreMax="100"
-        app:scoreValue="75">
+        app:scoreValue="66">
 
     </com.example.m2tmdbapp2027.ScoreGaugeView>
 

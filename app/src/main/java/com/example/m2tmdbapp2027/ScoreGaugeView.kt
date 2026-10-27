@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.withStyledAttributes
@@ -28,7 +29,10 @@ class ScoreGaugeView@JvmOverloads constructor (
 
     // Paint styles used for rendering are initialized here to improve performance,
     // since onDraw() is called for every screen refresh.
-    private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        textSize = context.resources.getDimension(R.dimen.score_gauge_view_label)
+        typeface = Typeface.create(null as String?, Typeface.BOLD)
+    }
     //  stroke width for rectangles
     private val so = 4f
     // compute dimensions to be used for drawing text
@@ -44,8 +48,6 @@ class ScoreGaugeView@JvmOverloads constructor (
 
         }
     }
-
-
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -74,6 +76,18 @@ class ScoreGaugeView@JvmOverloads constructor (
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
+        val percent = if (scoreMax>0) scoreValue / scoreMax else 0f
+
+        // Draw gauge main rectangle
+        paint.style = Paint.Style.FILL
+        paint.color = scoreColor
+        canvas.drawRect(
+            paddingLeft.toFloat(),
+            paddingTop.toFloat(),
+            (width- paddingRight) * percent,
+            (height.toFloat() - paddingBottom),
+            paint)
+
         // Set pencil style
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = so * 1.5f
@@ -85,6 +99,25 @@ class ScoreGaugeView@JvmOverloads constructor (
             height.toFloat() -paddingBottom - so,
             paint
         )
+
+        // caption text
+        paint.color = Color.DKGRAY
+        paint.style = Paint.Style.FILL
+        paint.textAlign = Paint.Align.LEFT
+        canvas.drawText(
+            " $scoreLabel",
+            paddingLeft.toFloat(),
+            (paddingTop + height - paddingBottom + textHeight) * 0.5f,
+            paint)
+
+        // percent value text
+        paint.textAlign = Paint.Align.RIGHT
+        canvas.drawText((100 * percent).toInt().toString() +  "% ",
+            width - paddingRight.toFloat(),
+            (paddingTop + height - paddingBottom + textHeight) * 0.5f,
+            paint)
+
+
 
     }
 
