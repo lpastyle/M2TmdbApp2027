@@ -1,14 +1,17 @@
 package com.example.m2tmdbapp2027
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.m2tmdbapp2027.data.remote.Person
 import com.example.m2tmdbapp2027.databinding.PersonItemBinding
 
-class PersonAdapter(private val persons: ArrayList<Person>) : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>()  {
+class PersonAdapter(private val persons: ArrayList<Person>, context: Context) : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>()  {
+    private var scoreRatings: Array<String> = context.resources.getStringArray(R.array.score_rating)
+    private var ratingColors: Array<String> = context.resources.getStringArray(R.array.rating_colors)
 
-    var maxPopularity = 0f
+    private var maxPopularity = 0f
 
     init {
         registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
@@ -42,4 +45,19 @@ class PersonAdapter(private val persons: ArrayList<Person>) : RecyclerView.Adapt
             binding.executePendingBindings()
         }
     }
+
+    private fun getRating(value: Double?, max: Double): String {
+        val index = mapValueToIndex(value, max, scoreRatings.size)
+        return scoreRatings[index]
+    }
+
+    private fun getScoreColor(value: Double?, max: Double): Int {
+        val index = mapValueToIndex(value, max, ratingColors.size)
+        return ratingColors[index].toInt()
+    }
+
+    private fun mapValueToIndex(value: Double?, max: Double, size: Int): Int =
+        if (value != null && max > 0.0) ((size * value) / max).toInt().coerceAtMost(size - 1) else 0
+
+
 }
