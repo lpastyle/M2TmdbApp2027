@@ -42,21 +42,23 @@ class PersonAdapter(private val persons: ArrayList<Person>, context: Context) : 
         fun bind(person: Person) {
             binding.person = person
             binding.scoreMax = maxPopularity
+            binding.scoreLabel = getRating(person.popularity, maxPopularity)
+            binding.scoreColor = getScoreColor(person.popularity, maxPopularity)
             binding.executePendingBindings()
         }
     }
 
-    private fun getRating(value: Double?, max: Double): String {
+    private fun getRating(value: Float?, max: Float): String {
         val index = mapValueToIndex(value, max, scoreRatings.size)
         return scoreRatings[index]
     }
 
-    private fun getScoreColor(value: Double?, max: Double): Int {
+    private fun getScoreColor(value: Float?, max: Float): Int {
         val index = mapValueToIndex(value, max, ratingColors.size)
         return ratingColors[index].toInt()
     }
 
-    private fun mapValueToIndex(value: Double?, max: Double, size: Int): Int =
+    private fun mapValueToIndex(value: Float?, max: Float, size: Int): Int =
         if (value != null && max > 0.0) ((size * value) / max).toInt().coerceAtMost(size - 1) else 0
 
 

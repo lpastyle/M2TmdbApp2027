@@ -23,9 +23,26 @@ class ScoreGaugeView@JvmOverloads constructor (
 ) : View(context, attrs, defStyleAttr) {
 
     var scoreMax : Float = DEFAULT_SCORE_MAX
+        set(value) {
+            field = value
+            invalidate()
+        }
+
     var scoreValue : Float = DEFAULT_SCORE_VALUE
+        set(value) {
+            field = value
+            invalidate()
+        }
     var scoreLabel : String = DEFAULT_SCORE_LABEL
+        set(value) {
+            field = value
+            invalidate()
+        }
     var scoreColor : Int = DEFAULT_SCORE_COLOR
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     // Paint styles used for rendering are initialized here to improve performance,
     // since onDraw() is called for every screen refresh.

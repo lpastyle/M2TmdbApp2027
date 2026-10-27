@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         // Init recycler view
         binding.popularPersonRv.setHasFixedSize(true)
         binding.popularPersonRv.layoutManager = LinearLayoutManager(this)
-        personAdapter = PersonAdapter(persons)
+        personAdapter = PersonAdapter(persons,this)
         binding.popularPersonRv.adapter = personAdapter
 
         // Infinite scrolling
