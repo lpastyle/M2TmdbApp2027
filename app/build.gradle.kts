@@ -69,6 +69,9 @@ dependencies {
     // Picasso
     implementation(libs.picasso)
 
+    // Fragments
+    implementation(libs.androidx.fragment.ktx)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
