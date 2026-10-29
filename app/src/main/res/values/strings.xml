@@ -3,6 +3,7 @@
     <string name="total_results_default_text">Nothing to show</string>
     <string name="total_results_text">Showing %1$d/%2$d persons</string>
     <string name="main_activity_title">Popular persons</string>
+    <string name="no_label">No label !</string>
 
     <string-array name="score_rating">
         <item>POOR</item>

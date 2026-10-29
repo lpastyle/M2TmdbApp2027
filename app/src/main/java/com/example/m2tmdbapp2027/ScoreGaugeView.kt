@@ -61,7 +61,8 @@ class ScoreGaugeView@JvmOverloads constructor (
             scoreMax = getFloat(R.styleable.ScoreGaugeView_scoreMax, DEFAULT_SCORE_MAX)
             scoreValue = getFloat(R.styleable.ScoreGaugeView_scoreValue, DEFAULT_SCORE_VALUE)
             scoreColor = getColor(R.styleable.ScoreGaugeView_scoreColor, DEFAULT_SCORE_COLOR)
-            scoreLabel = getString(R.styleable.ScoreGaugeView_scoreLabel) ?: DEFAULT_SCORE_LABEL
+            scoreLabel = getString(R.styleable.ScoreGaugeView_scoreLabel) ?:
+            if (isInEditMode) context.getString(R.string.no_label) else DEFAULT_SCORE_LABEL
 
         }
     }
