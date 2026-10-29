@@ -69,7 +69,13 @@ class MainActivity : AppCompatActivity() {
         // Init fragments KT like
         savedInstanceState ?: supportFragmentManager.commit {
             setReorderingAllowed(true)
-            add(R.id.fragmentContainerView, BlankFragment())
+            // init with default constructor
+            //add(R.id.fragmentContainerView, BlankFragment())
+            // init with factory
+            add(
+                R.id.fragmentContainerView,
+                BlankFragment.newInstance("Hello","World !")
+            )
         }
 
         loadCurrentPage()
