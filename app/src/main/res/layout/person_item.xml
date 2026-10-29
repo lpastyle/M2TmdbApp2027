@@ -82,7 +82,6 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/social_bar_fcv"
-            android:name="com.example.m2tmdbapp2027.SocialBarFragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
