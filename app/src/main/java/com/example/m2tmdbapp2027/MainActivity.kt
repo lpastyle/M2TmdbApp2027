@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             ft.commit()
         } */
         // Init fragments KT like
-        savedInstanceState ?: supportFragmentManager.commit {
+        /* savedInstanceState ?: supportFragmentManager.commit {
             setReorderingAllowed(true)
             // init with default constructor
             //add(R.id.fragmentContainerView, BlankFragment())
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.fragmentContainerView,
                 BlankFragment.newInstance("Hello","World !")
             )
-        }
+        } */
 
         loadCurrentPage()
     }
