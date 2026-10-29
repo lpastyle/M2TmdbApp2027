@@ -2,38 +2,35 @@ package com.example.m2tmdbapp2027
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.m2tmdbapp2027.databinding.FragmentSocialBarBinding
+import kotlin.collections.get
+import kotlin.compareTo
+import kotlin.text.set
+import kotlin.toString
 
-private const val SBF_KEY = "sbf_key"
+const val SBFC_VIEW_TAG = "sbfcv_view_tag"
 
 class SocialBarFragment : Fragment() {
+    private val LOGTAG = SocialBarFragment::class.simpleName
+
    private lateinit var binding : FragmentSocialBarBinding
     private var cn : Int = Color.LTGRAY
     private var cs : Int = Color.RED
 
-    private var mapkey : Int? = null
-
     companion object {
-        fun newInstance(param1: String, param2: String) =
-            SocialBarFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(SBF_KEY, mapkey as Int)
-                }
-            }
+        fun newInstance() = SocialBarFragment
     }
 
     private val viewModel by activityViewModels<SocialBarViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            mapkey = it.getString(SBF_KEY)?.toInt()
-        }
     }
 
     override fun onCreateView(
@@ -50,10 +47,36 @@ class SocialBarFragment : Fragment() {
         cs = requireContext().getColor(R.color.ic_social_selected)
 
         // get the map key associated to this person
-        //val mapkey = 0
+        requireArguments().getString(SBFC_VIEW_TAG)?.let {
+            val mapkey = it.toInt()
 
-        // Set nb like text and icon color
-        binding.nbLikeTv.text = viewModel.nbLikes.getOrElse(mapkey as Int, {0}).toString()
+            // set like button
+            val nblikes = viewModel.nbLikes.getOrElse(mapkey, { 0 })
+            binding.nbLikeTv.text = nblikes.toString()
+            val likeColor = if (nblikes > 0) cs else cn
+            binding.likeIv.setColorFilter(likeColor)
+            binding.nbLikeTv.setTextColor(likeColor)
 
+            binding.likeIv.setOnClickListener {
+                viewModel.nbLikes[mapkey] = viewModel.nbLikes.getOrElse(mapkey, { 0 }) + 1
+                binding.nbLikeTv.text = viewModel.nbLikes[mapkey].toString()
+                binding.likeIv.setColorFilter(cs)
+                binding.nbLikeTv.setTextColor(cs)
+            }
+
+            // set favorite button
+            val isFavorite = viewModel.isFavorite.getOrElse(mapkey,{false})
+            binding.favoriteIv.setColorFilter(if (isFavorite) cs else cn)
+            binding.favoriteIv.setOnClickListener {
+                viewModel.isFavorite[mapkey] = !viewModel.isFavorite.getOrElse(mapkey,{false})
+                binding.favoriteIv.setColorFilter(if (viewModel.isFavorite[mapkey] == true) cs else cn )
+            }
+
+            // set share button
+            binding.shareIv.setColorFilter(cn)
+            binding.shareIv.setOnClickListener {
+                Log.d(LOGTAG,"shared clicked for id=${mapkey}")
+            }
+        }
     }
 }
