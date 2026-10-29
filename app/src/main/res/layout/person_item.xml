@@ -80,6 +80,35 @@
             android:text="@{String.format(`%.1f`,person.popularity)}"
             tools:text="Popularity" />
 
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/social_bar_fcv"
+            android:name="com.example.m2tmdbapp2027.SocialBarFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/scoreGaugeView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/popularity_tv"
+            tools:layout="@layout/fragment_social_bar" />
+
+        <com.example.m2tmdbapp2027.ScoreGaugeView
+            android:id="@+id/scoreGaugeView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/separator_fl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:scoreColor="@{scoreColor}"
+            app:scoreLabel="@{scoreLabel}"
+            app:scoreMax="@{scoreMax}"
+            app:scoreValue="@{person.popularity}" />
+
         <FrameLayout
             android:id="@+id/separator_fl"
             android:layout_width="0dp"
@@ -93,18 +122,5 @@
 
         </FrameLayout>
 
-        <com.example.m2tmdbapp2027.ScoreGaugeView
-            android:id="@+id/scoreGaugeView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/popularity_tv"
-            app:scoreLabel="@{scoreLabel}"
-            app:scoreColor="@{scoreColor}"
-            app:scoreMax="@{scoreMax}"
-            app:scoreValue="@{person.popularity}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
