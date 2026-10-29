@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -57,6 +59,18 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+        // Init fragments JAVA like
+        /* if (savedInstanceState == null) {
+            val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+            ft.setReorderingAllowed(true)
+            ft.add(R.id.fragmentContainerView, BlankFragment())
+            ft.commit()
+        } */
+        // Init fragments KT like
+        savedInstanceState ?: supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            add(R.id.fragmentContainerView, BlankFragment())
+        }
 
         loadCurrentPage()
     }
