@@ -28,6 +28,7 @@ class BlankFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(LOGTAG, "onCreate")
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -38,6 +39,7 @@ class BlankFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d(LOGTAG, "onCreateView")
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_blank, container, false)
         binding = FragmentBlankBinding.inflate(inflater, container, false)
@@ -45,6 +47,7 @@ class BlankFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d(LOGTAG, "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
         binding.param1Tv.text = param1
         binding.param2Tv.text = param2
