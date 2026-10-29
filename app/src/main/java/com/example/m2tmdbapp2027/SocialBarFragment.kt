@@ -9,10 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.m2tmdbapp2027.databinding.FragmentSocialBarBinding
-import kotlin.collections.get
-import kotlin.compareTo
-import kotlin.text.set
-import kotlin.toString
 
 const val SBFC_VIEW_TAG = "sbfcv_view_tag"
 
