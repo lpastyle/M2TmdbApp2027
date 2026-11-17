@@ -23,7 +23,11 @@ class SocialBarFragment : Fragment() {
         fun newInstance() = SocialBarFragment
     }
 
-    private val viewModel by activityViewModels<SocialBarViewModel>()
+    private val viewModel by activityViewModels<SocialBarViewModel> {
+        SocialBarViewModel.SocialBarViewModelFactory(
+            (requireActivity().application as TmdbApplication).database.socialBarDao()
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
