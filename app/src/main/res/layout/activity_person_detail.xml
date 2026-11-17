@@ -7,4 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".PersonDetailActivity">
 
+    <TextView
+        android:id="@+id/person_id_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/person_name_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="person_id"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

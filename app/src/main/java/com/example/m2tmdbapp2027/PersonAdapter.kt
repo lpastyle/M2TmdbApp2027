@@ -8,9 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
-import androidx.fragment.app.commit
 import androidx.fragment.app.commitNow
-import androidx.fragment.app.replace
 import androidx.recyclerview.widget.RecyclerView
 import com.example.m2tmdbapp2027.data.remote.Person
 import com.example.m2tmdbapp2027.databinding.PersonItemBinding
@@ -22,6 +20,8 @@ class PersonAdapter(private val persons: ArrayList<Person>, private val context:
     private var ratingColors: Array<String> = context.resources.getStringArray(R.array.rating_colors)
 
     private var maxPopularity = 0f
+
+    private var onPersonItemClickedListener: OnPersonItemClickedListener? = null
 
     init {
         registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
@@ -91,6 +91,9 @@ class PersonAdapter(private val persons: ArrayList<Person>, private val context:
             binding.scoreColor = getScoreColor(person.popularity, maxPopularity)
             binding.socialBarFcv.id = View.generateViewId()
             binding.socialBarFcv.tag = person.id.toString()
+            binding.personItemCl.setOnClickListener {
+                onPersonItemClickedListener?.onPersonItemClicked(person)
+            }
             binding.executePendingBindings()
         }
     }
@@ -119,5 +122,9 @@ class PersonAdapter(private val persons: ArrayList<Person>, private val context:
                 )
             }
         }
+    }
+
+    fun setPersonItemClickedListener(listener: OnPersonItemClickedListener) {
+        this.onPersonItemClickedListener =listener
     }
 }

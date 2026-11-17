@@ -1,5 +1,6 @@
 package com.example.m2tmdbapp2027
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -7,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +20,7 @@ import kotlinx.coroutines.launch
 
 const val SAVED_HIGHEST_POPULARITY_SPKEY = "saved_highest_popularity_spkey"
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnPersonItemClickedListener  {
     private val LOGTAG= MainActivity::class.simpleName
 
     private lateinit var binding: ActivityMainBinding
@@ -48,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         binding.popularPersonRv.setHasFixedSize(true)
         binding.popularPersonRv.layoutManager = LinearLayoutManager(this)
         personAdapter = PersonAdapter(persons,this)
+        personAdapter.setPersonItemClickedListener(this)
         binding.popularPersonRv.adapter = personAdapter
 
         // Infinite scrolling
@@ -114,5 +114,15 @@ class MainActivity : AppCompatActivity() {
             0f
         )
         Log.i(LOGTAG, "saved highest person popularity = $highestPopularity")
+    }
+
+    override fun onPersonItemClicked(person: Person) {
+        Log.d(LOGTAG,"${person.name} clicked !")
+        startActivity(
+            Intent(
+                this,
+                PersonDetailActivity::class.java
+            ).putExtra(PERSON_ID_EXTRA_KEY, person.id)
+        )
     }
 }

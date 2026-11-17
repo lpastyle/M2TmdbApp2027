@@ -26,6 +26,7 @@
         </activity>
         <activity
             android:name=".PersonDetailActivity"
+            android:label="@string/person_detail_activity_title"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>
