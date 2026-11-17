@@ -1,9 +1,12 @@
 package com.example.m2tmdbapp2027.data.db
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.m2tmdbapp2027.BuildConfig
+import java.util.concurrent.Executors
 
 @Database (
     entities = [SocialBarEntity::class],
@@ -26,9 +29,15 @@ abstract class TmdbDataBase : RoomDatabase() {
                     context.applicationContext,
                     TmdbDataBase::class.java,
                     DB_NAME
-                ).build().also {
-                    instance = it
-                }
+                ) /* .apply {
+                    if (BuildConfig.DEBUG) {
+                        setQueryCallback({ sql, args ->
+                            Log.d("RoomSQL", "SQL: $sql  args: $args")},
+                            Executors.newSingleThreadExecutor())
+                    }
+                } */ .build().also {
+                        instance = it
+                    }
             }
     }
 }
