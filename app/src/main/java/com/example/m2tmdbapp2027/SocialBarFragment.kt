@@ -77,9 +77,10 @@ class SocialBarFragment : Fragment() {
                 binding.favoriteIv.setColorFilter(if (isFavorite) cs else cn)
             }
             binding.favoriteIv.setOnClickListener {
+                var isFavoriteNow = viewModel.isFavorite.value?.getOrElse(mapkey) { false } ?: false
                 var nbLikes = viewModel.nbLikes.value?.getOrElse(mapkey) { 0 } ?: 0
-                var isFavoriteNow = viewModel.isFavorite.value?.getOrElse(mapkey) { false} ?: false
-                isFavoriteNow != isFavoriteNow
+
+                isFavoriteNow = !isFavoriteNow
                 viewModel.save(SocialBarEntity(mapkey, isFavoriteNow, nbLikes))
 
                 /*UI update no longer needed here. Done by the livedata observer
