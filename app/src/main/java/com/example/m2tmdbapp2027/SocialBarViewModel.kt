@@ -10,5 +10,6 @@ import kotlinx.coroutines.launch
 class SocialBarViewModel(private val socialBarDao: SocialBarDao) : ViewModel() {
 
     val nbLikes: LiveData<MutableMap<Int,Int>> = socialBarDao.getAllLikes().asLiveData()
-    //var isFavorite = mutableMapOf<Int, Boolean>()
+    val isFavorite: LiveData<MutableMap<Int,Boolean>> = socialBarDao.getAllFavorites().asLiveData()
+
 }
