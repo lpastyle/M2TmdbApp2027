@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.m2tmdbapp2027.data.db.SocialBarEntity
 import com.example.m2tmdbapp2027.databinding.FragmentSocialBarBinding
 
 const val SBFC_VIEW_TAG = "sbfcv_view_tag"
@@ -15,7 +16,7 @@ const val SBFC_VIEW_TAG = "sbfcv_view_tag"
 class SocialBarFragment : Fragment() {
     private val LOGTAG = SocialBarFragment::class.simpleName
 
-   private lateinit var binding : FragmentSocialBarBinding
+    private lateinit var binding : FragmentSocialBarBinding
     private var cn : Int = Color.LTGRAY
     private var cs : Int = Color.RED
 
@@ -51,25 +52,41 @@ class SocialBarFragment : Fragment() {
             val mapkey = it.toInt()
 
             // set like button
-            val nblikes = viewModel.nbLikes.getOrElse(mapkey, { 0 })
-            binding.nbLikeTv.text = nblikes.toString()
-            val likeColor = if (nblikes > 0) cs else cn
-            binding.likeIv.setColorFilter(likeColor)
-            binding.nbLikeTv.setTextColor(likeColor)
-
+            viewModel.nbLikes.observe(viewLifecycleOwner) { likes ->
+                val nblikes = likes.getOrElse(mapkey, { 0 })
+                binding.nbLikeTv.text = nblikes.toString()
+                val likeColor = if (nblikes > 0) cs else cn
+                binding.likeIv.setColorFilter(likeColor)
+                binding.nbLikeTv.setTextColor(likeColor)
+            }
             binding.likeIv.setOnClickListener {
+                var nbLikesNow = viewModel.nbLikes.value?.getOrElse(mapkey) { 0 } ?: 0
+                var isFavorite = viewModel.isFavorite.value?.getOrElse(mapkey) { false} ?: false
+                nbLikesNow++
+                viewModel.save(SocialBarEntity(mapkey, isFavorite, nbLikesNow))
+                /* UI update no longer needed here. Done by the livedata observer
                 viewModel.nbLikes[mapkey] = viewModel.nbLikes.getOrElse(mapkey, { 0 }) + 1
                 binding.nbLikeTv.text = viewModel.nbLikes[mapkey].toString()
                 binding.likeIv.setColorFilter(cs)
-                binding.nbLikeTv.setTextColor(cs)
+                binding.nbLikeTv.setTextColor(cs) */
             }
 
             // set favorite button
-            val isFavorite = viewModel.isFavorite.getOrElse(mapkey,{false})
-            binding.favoriteIv.setColorFilter(if (isFavorite) cs else cn)
+            viewModel.isFavorite.observe(viewLifecycleOwner) { favorites ->
+                val isFavorite = favorites.getOrElse(mapkey, { false })
+                binding.favoriteIv.setColorFilter(if (isFavorite) cs else cn)
+            }
             binding.favoriteIv.setOnClickListener {
-                viewModel.isFavorite[mapkey] = !viewModel.isFavorite.getOrElse(mapkey,{false})
-                binding.favoriteIv.setColorFilter(if (viewModel.isFavorite[mapkey] == true) cs else cn )
+                var nbLikes = viewModel.nbLikes.value?.getOrElse(mapkey) { 0 } ?: 0
+                var isFavoriteNow = viewModel.isFavorite.value?.getOrElse(mapkey) { false} ?: false
+                isFavoriteNow != isFavoriteNow
+                viewModel.save(SocialBarEntity(mapkey, isFavoriteNow, nbLikes))
+
+                /*UI update no longer needed here. Done by the livedata observer
+                   viewModel.isFavorite[mapkey] =
+                    !viewModel.isFavorite.getOrElse(mapkey, { false })
+                binding.favoriteIv.setColorFilter(if (viewModel.isFavorite[mapkey] == true) cs else cn)*/
+
             }
 
             // set share button
