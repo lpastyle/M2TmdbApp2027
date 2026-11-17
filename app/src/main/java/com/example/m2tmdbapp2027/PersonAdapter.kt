@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.fragment.app.commit
 import androidx.fragment.app.commitNow
 import androidx.fragment.app.replace
@@ -26,6 +27,7 @@ class PersonAdapter(private val persons: ArrayList<Person>, private val context:
         registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 maxPopularity = persons.maxOfOrNull { it.popularity } ?: 0f
+                saveHighestPopularity()
             }
         })
 
@@ -106,5 +108,16 @@ class PersonAdapter(private val persons: ArrayList<Person>, private val context:
     private fun mapValueToIndex(value: Float?, max: Float, size: Int): Int =
         if (value != null && max > 0.0) ((size * value) / max).toInt().coerceAtMost(size - 1) else 0
 
-
+    fun saveHighestPopularity() {
+        val sharedPref = context.getPreferences(Context.MODE_PRIVATE)
+        val highestPopularity = sharedPref.getFloat(SAVED_HIGHEST_POPULARITY_SPKEY, 0f)
+        if (maxPopularity > highestPopularity) {
+            sharedPref.edit {
+                putFloat(
+                    SAVED_HIGHEST_POPULARITY_SPKEY,
+                    maxPopularity
+                )
+            }
+        }
+    }
 }

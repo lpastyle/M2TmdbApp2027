@@ -19,6 +19,8 @@ import com.example.m2tmdbapp2027.databinding.ActivityMainBinding
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
+const val SAVED_HIGHEST_POPULARITY_SPKEY = "saved_highest_popularity_spkey"
+
 class MainActivity : AppCompatActivity() {
     private val LOGTAG= MainActivity::class.simpleName
 
@@ -77,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                 BlankFragment.newInstance("Hello","World !")
             )
         } */
-
+        showHighestPopularity()
         loadCurrentPage()
     }
 
@@ -103,5 +105,14 @@ class MainActivity : AppCompatActivity() {
                 binding.loading = false
             }
         }
+    }
+
+    fun showHighestPopularity () {
+        val sharedPref = getPreferences(MODE_PRIVATE)
+        val highestPopularity = sharedPref.getFloat(
+            SAVED_HIGHEST_POPULARITY_SPKEY,
+            0f
+        )
+        Log.i(LOGTAG, "saved highest person popularity = $highestPopularity")
     }
 }
