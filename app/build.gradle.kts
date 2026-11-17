@@ -76,6 +76,12 @@ dependencies {
     // Fragments
     implementation(libs.androidx.fragment.ktx)
 
+    // Room
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler) // ignorer le warning conseillant d’utiliser KTS
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
