@@ -16,6 +16,8 @@ abstract class TmdbDataBase : RoomDatabase() {
 
     companion object {
         private val DB_NAME = "tmdpapp.db"
+
+        @Volatile
         private var instance: TmdbDataBase? = null
 
         fun getInstance(context: Context) =
