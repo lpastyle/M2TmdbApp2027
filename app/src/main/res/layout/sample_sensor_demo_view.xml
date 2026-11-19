@@ -5,11 +5,10 @@
 
     <com.example.m2tmdbapp2027.SensorDemoView
         style="@style/Widget.Theme.M2TmdbApp2027.MyView"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="40dp"
         android:paddingBottom="40dp"
         app:dialCaption="@string/no_label"
         app:dialColor="@color/teal_700"  />
-
 </FrameLayout>

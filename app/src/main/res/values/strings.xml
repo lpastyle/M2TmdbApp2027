@@ -42,15 +42,15 @@
 
     <!-- needle colors, as 0xAARRGGBB -->
     <integer-array name="dial_needle_colors">
-        <item>0xFF0000FF</item>
-        <item>0xFFFF0000</item>
-        <item>0xFF00FF00</item>
-        <item>0xFFFF00FF</item>
-        <item>0xFFFFFF00</item>
-        <item>0xFFE7685F</item>
-        <item>0xFF81C212</item>
-        <item>0xFFFCD01B</item>
-        <item>0xFFBDBDBD</item>
+        <item>-16776961</item>
+        <item>-65536</item>
+        <item>-16711936</item>
+        <item>-65281</item>
+        <item>-256</item>
+        <item>-1611681</item>
+        <item>-8273390</item>
+        <item>-208869</item>
+        <item>-4342339</item>
     </integer-array>
 
 </resources>
