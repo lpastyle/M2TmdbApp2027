@@ -1,33 +1,40 @@
 package com.example.m2tmdbapp2027
 
+import android.hardware.Sensor
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.m2tmdbapp2027.databinding.SensorItemBinding
 
 class SensorListAdapter(
-
+    val sensors: ArrayList<Sensor>
 ) : RecyclerView.Adapter<SensorListAdapter.SensorItemViewHolder>() {
+
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): SensorItemViewHolder {
-        TODO("Not yet implemented")
+        val binding = SensorItemBinding.inflate(
+            LayoutInflater.from (parent.context),
+            parent,
+            false)
+        return SensorItemViewHolder(binding)
     }
+
 
     override fun onBindViewHolder(
         holder: SensorItemViewHolder,
         position: Int
     ) {
-        TODO("Not yet implemented")
+        holder.binding.sensorItem = sensors[position]
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int = sensors.size
 
 
     inner class SensorItemViewHolder(
-        binding : SensorItemBinding
+        val binding : SensorItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
     }
