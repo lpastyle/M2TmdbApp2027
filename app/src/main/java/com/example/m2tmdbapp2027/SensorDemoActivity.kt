@@ -1,5 +1,6 @@
 package com.example.m2tmdbapp2027
 
+import android.hardware.Sensor
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import com.example.m2tmdbapp2027.databinding.ActivitySensorDemoBinding
 class SensorDemoActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySensorDemoBinding
     private lateinit var sensorListAdapter: SensorListAdapter
+    private val sensors: ArrayList<Sensor> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,7 @@ class SensorDemoActivity : AppCompatActivity() {
         binding.sensorListRv.layoutManager = LinearLayoutManager(this)
         sensorListAdapter = SensorListAdapter()
         binding.sensorListRv.adapter = sensorListAdapter
+
 
     }
 }
