@@ -3,4 +3,9 @@
     <style name="Widget.Theme.M2TmdbApp2027.ScoreGaugeView" parent="">
         <item name="android:background">@color/gray_400</item>
     </style>
+
+    <style name="Widget.Theme.M2TmdbApp2027.MyView" parent="">
+        <item name="android:background">@color/gray_400</item>
+        <item name="dialColor">@color/gray_400</item>
+    </style>
 </resources>

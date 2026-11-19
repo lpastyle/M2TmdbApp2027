@@ -40,4 +40,17 @@
     <string name="sensor_name">sensor name</string>
     <string name="sensor_unknown">unknown sensor</string>
 
+    <!-- needle colors, as 0xAARRGGBB -->
+    <integer-array name="dial_needle_colors">
+        <item>0xFF0000FF</item>
+        <item>0xFFFF0000</item>
+        <item>0xFF00FF00</item>
+        <item>0xFFFF00FF</item>
+        <item>0xFFFFFF00</item>
+        <item>0xFFE7685F</item>
+        <item>0xFF81C212</item>
+        <item>0xFFFCD01B</item>
+        <item>0xFFBDBDBD</item>
+    </integer-array>
+
 </resources>
