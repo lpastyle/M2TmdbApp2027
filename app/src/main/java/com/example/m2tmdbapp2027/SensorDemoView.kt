@@ -5,9 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Typeface
-import android.graphics.drawable.Drawable
 import android.hardware.SensorEvent
-import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.withStyledAttributes
@@ -104,7 +102,7 @@ class SensorDemoView @JvmOverloads constructor(
         sensorEvent?.let {
             val maxRange = it.sensor.maximumRange
             if (maxRange > 0f) {
-                for (i in 0 .. it.values.size) {
+                for (i in 0..<min(it.values.size, dialNeedleColors.size)) {
                     paint.color = dialNeedleColors[i]
                     val angle = ((it.values[i] * 2 * PI) / maxRange)
                     canvas.drawLine(

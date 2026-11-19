@@ -74,12 +74,16 @@ class SensorDemoActivity : AppCompatActivity(),
         sensorManager.unregisterListener(this)
     }
 
-    override fun onSensorItemClicked(sensor: Sensor?) {
+    override fun onSensorItemClicked(sensor: Sensor) {
         Log.d(LOGTAG,"onSensorItemClicked('${sensor?.name}')")
         unRegisterSensorListener()
         currentSensor = sensor
         registerSensorListener()
-
+        // register selected sensor listener
+        Log.i(LOGTAG,"now listening to '${sensor.name}'")
+        registerSensorListener()
+        binding.sensorDemoView.dialCaption = sensor.name
+        binding.sensorDemoView.sensorEvent = null
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
@@ -88,6 +92,16 @@ class SensorDemoActivity : AppCompatActivity(),
 
     override fun onSensorChanged(event: SensorEvent?) {
         Log.i(LOGTAG, "onSensorChanged(${event?.values?.size} values)")
+        if (event != null) {
+            val values = StringBuilder()
+            val n = event.values.size
+            for (i in 0 until n) {
+                values.append("v[").append(i).append("]=").append(event.values[i])
+                    .append(if (n - i == 1) '.' else ", ")
+            }
+            binding.sensorDemoView.sensorEvent = event
+            binding.arrayValuesTv.text = values.toString()
+        }
     }
 
     // activity life cycle management:

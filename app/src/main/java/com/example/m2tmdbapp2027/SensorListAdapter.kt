@@ -39,7 +39,10 @@ class SensorListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.sensorItemCl.setOnClickListener {
-                sensorItemClickListener.onSensorItemClicked(binding.sensorItem)
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    sensorItemClickListener.onSensorItemClicked(sensors[position])
+                }
             }
         }
     }
