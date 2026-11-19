@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".SensorDemoActivity">
 
-
     <TextView
         android:id="@+id/sensor_list_caption_tv"
         android:layout_width="0dp"
@@ -18,11 +17,12 @@
         android:layout_marginBottom="8dp"
         android:background="@color/purple_700"
         android:text="@string/sensor_list_caption"
-        android:textColor="@color/white"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="@dimen/sensor_demo_caption"
         app:layout_constraintBottom_toTopOf="@+id/sensor_list_rv"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,10 +32,61 @@
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/sensor_values_caption_tv"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sensor_list_caption_tv" />
+
+    <TextView
+        android:id="@+id/sensor_values_caption_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/purple_700"
+        android:text="@string/sensor_values_caption"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sensor_demo_caption"
+        app:layout_constraintBottom_toTopOf="@+id/sensor_demo_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sensor_list_rv" />
+
+    <com.example.m2tmdbapp2027.SensorDemoView
+        android:id="@+id/sensor_demo_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:dialCaption="@string/sensor_unknown"
+        app:dialColor="@color/gray_600"
+        app:layout_constraintBottom_toTopOf="@+id/arrayValuesTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sensor_values_caption_tv" />
+
+    <TextView
+        android:id="@+id/arrayValuesTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/no_sensor_values"
+        android:textAlignment="viewStart"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/sensor_demo_caption"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sensor_demo_view" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
